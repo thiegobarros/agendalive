@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LiveService } from '../../../shared/service/live.service';
+
 
 @Component({
   selector: 'app-live-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LiveListComponent implements OnInit {
 
-  constructor() { }
+  peoples:any
+  constructor(private liveService:LiveService) { }
 
   ngOnInit(): void {
+    this.liveService.getPeoples().subscribe(
+      response => {
+        this.peoples = response.results
+      }
+    )
   }
 
 }
